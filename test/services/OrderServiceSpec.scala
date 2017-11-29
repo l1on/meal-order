@@ -11,25 +11,18 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
   val orderSvc = new OrderService(restaurantRepo)
 
   "OrderService#createOrders" should {
-    "include the correct orders according to the example" in {
-      val others = 38
-      val vegetarian = 5
-      val glutenFree = 7
-      val nutFree = 0
-      val fishFree = 0
-      val requirement = Requirement(others, vegetarian, glutenFree, nutFree, fishFree)
-
+    "build a list of orders meeting the example set in the requirement document" in {
       val restaurants = List(
-        Restaurant("A", 5, maxMeals=40),
-        Restaurant("B", 3, maxMeals=100, maxVegetarian=20, maxGlutenFree=20)
+        Restaurant("A", rating = 5, maxMeals = 40, maxVegetarian = 4),
+        Restaurant("B", rating = 3, maxMeals = 100, maxVegetarian = 20, maxGlutenFree = 20)
       )
-
       when(restaurantRepo.readAll) thenReturn restaurants
+
+      val requirement = Requirement(others = 38, vegetarian = 5, glutenFree = 7, nutFree = 0, fishFree = 0)
 
       val actualOrders = orderSvc.createOrders(requirement)
 
       actualOrders mustEqual List(Order("A", 36, 4, 0, 0, 0), Order("B", 2, 1, 7, 0, 0))
     }
-
   }
 }
