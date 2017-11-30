@@ -77,7 +77,7 @@ unachievable goal.
 ```bash
 docker run -it -p 80:9000 -v lib:/root/.ivy2/cache --name meal-order-generator --rm iluvzhouying/meal-order-generator
 ```
-  until you see the following in the terminal (it will take a while depending on your internet connection):
+  then wait until you see the following in the terminal (it will take a while depending on your internet connection):
 ```
 --- (Running the application, auto-reloading is enabled) ---
 
