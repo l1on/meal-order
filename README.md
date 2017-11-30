@@ -109,7 +109,7 @@ if you're already fluent in Java.
 
 One thing you'll probably notice in the code is that all the variables are immutable and recursion takes the place of loops. 
 That's intentional because I want to see how far I can go with functional programming and the tangible benefits it has in
-non-trivial programs.
+non-trivial programs (it's been goood so far. The biggest benefits are clean code and easy-to-fix bugs).
 
 
 
