@@ -93,7 +93,7 @@ http://localhost/orders?total=50&vegetarian=5&gluten_free=7&nut_free=1&fish_free
 All the query parameters are optional. The default for 'total' is 1 and 0 for all the others.
 
 ## How to review the code
-This implementaion was built on the [Play Framework](https://www.playframework.com/) (Scala). The files that are of interest are the following (in the order for esay understanding of workflow): 
+This implementaion was built on the [Play Framework](https://www.playframework.com/) (Scala). The files of interest are the following (in the order for esay understanding of workflow): 
 ```bash
 conf/routes
 app/controllers/OrdersController.scala
