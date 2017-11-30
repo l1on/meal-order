@@ -1,17 +1,17 @@
 # meal-order-generator
 
-Given that we have the following two restaurants:
+Assume that we have the following two restaurants:
 
 ```Scala
     Restaurant("A", rating = 5, maxMeals = 40, maxVegetarian = 4),
     Restaurant("B", rating = 3, maxMeals = 100, maxVegetarian = 20, maxGlutenFree = 20)
 ```
-and then we issue a request for meals through HTTP GET like this:
+We then issue a request for meals by means of HTTP GET. Like this:
 
 ```bash
 /orders?total=50&vegetarian=5&gluten_free=7
 ```
-we will see the following recommendation for orders (with the HTTP status code 200):
+we shall see the following recommendation for orders (with the HTTP status code 200):
 
 ```json
 [
@@ -27,17 +27,17 @@ If we ask for something that obviously cannot be fully fulfilled:
 ```bash
 /orders?total=5000
 ```
-the system will just confirm that with an empty recommendation (with the HTTP status code 200).
+the system will confirm that with an empty recommendation (with the HTTP status code 200).
 ```json
 []
 ```
 
-If we happen to issue an invalid meal request like this (more special meal requests than total):
+If we happen to issue an invalid meal request like this (more sub meals than total):
 
 ```bash
 /orders?total=5&nut_free=3&fish_free=3
 ```
-or this:
+or even this:
 
 ```bash
 /orders?total=-2
@@ -64,12 +64,11 @@ First, we rank all the restaurants by their ratings and then look at them one by
 to the one with the lowest rating. 
 
 Then for each restaurant, we make it prioritize all the requests for special meals (vegetarian, gluten free, nut free and fish free) over
-the one for general (others) meals. Among the special meals, the restaurant is instructed to always prioritize those with a higher number of
+the one for general (others) meals. In the scope of special meals, the restaurant is instructed to always prioritize those with a higher number of
 requests. 
 
 Any unfufilled meals will be passed down to the next restaurant. If there're still unfulfilled meals after going through
-all the restaurants, we'll simply give an empty recommandation, signaling that fulfilling the original request is an 
-unachievable goal. 
+all the restaurants, we'll simply give an empty recommandation, signaling that fulfilling the original request is unachievable. 
 
 ## How to run a local instance
 1. Make sure you have [Docker](https://www.docker.com/community-edition#/download) installed.
