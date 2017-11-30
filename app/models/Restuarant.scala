@@ -9,7 +9,6 @@ case class Restaurant(name: String, rating: Int = 3, maxMeals: Int, maxVegetaria
       ("fishFree", requirement.fishFree),
     ).sortBy(-_._2) :+  ("others", requirement.others)
 
-
     fulfillRecur(prioritizedReqList, maxMeals, requirement)
   }
 

@@ -24,5 +24,57 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
 
       actualOrders mustEqual List(Order("A", 36, 4, 0, 0, 0), Order("B", 2, 1, 7, 0, 0))
     }
+
+    "return an empty list if the request cannot be fully fulfilled by all the restaurants" in {
+      val restaurants = List(
+        Restaurant("A", maxMeals = 4, maxVegetarian = 4),
+        Restaurant("B", maxMeals = 7, maxVegetarian = 2, maxGlutenFree = 2),
+        Restaurant("C", maxMeals = 5),
+        Restaurant("D", maxMeals = 5, maxVegetarian = 5, maxGlutenFree = 5, maxNutFree = 5, maxFishFree = 5)
+      )
+      when(restaurantRepo.readAll) thenReturn restaurants
+
+      val requirement = Requirement(others = 400, vegetarian = 100, glutenFree = 250, nutFree = 0, fishFree = 0)
+
+      val actualOrders = orderSvc.createOrders(requirement)
+
+      actualOrders mustEqual List()
+    }
+
+    "return an empty list if there're no restaurants at all" in {
+      when(restaurantRepo.readAll) thenReturn List()
+
+      val requirement = Requirement(others = 400, vegetarian = 100, glutenFree = 250, nutFree = 0, fishFree = 0)
+
+      val actualOrders = orderSvc.createOrders(requirement)
+
+      actualOrders mustEqual List()
+    }
+
+    "return an empty list if the requirement is empty" in {
+      when(restaurantRepo.readAll) thenReturn List(
+        Restaurant("A", maxMeals = 4, maxVegetarian = 4),
+        Restaurant("B", maxMeals = 7, maxVegetarian = 2, maxGlutenFree = 2)
+      )
+
+      val requirement = Requirement(others = 0, vegetarian = 0, glutenFree = 0, nutFree = 0, fishFree = 0)
+
+      val actualOrders = orderSvc.createOrders(requirement)
+
+      actualOrders mustEqual List()
+    }
+
+    "remove a restaurant from the list if the restaurant does not fulfill anything" in {
+      when(restaurantRepo.readAll) thenReturn List(
+        Restaurant("A", maxMeals = 0, maxVegetarian = 4),
+        Restaurant("B", maxMeals = 7, maxVegetarian = 2, maxGlutenFree = 2)
+      )
+
+      val requirement = Requirement(others = 2, vegetarian = 1, glutenFree = 0, nutFree = 0, fishFree = 0)
+
+      val actualOrders = orderSvc.createOrders(requirement)
+
+      actualOrders.exists(o => o.restaurant == "A") mustBe false
+    }
   }
 }

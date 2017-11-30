@@ -3,7 +3,7 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-# /restaurant-orders?total=50&vegetarian=5&​gluten​_free=7&nut_free=1&fish_free=23
+# /orders?total=50&vegetarian=5&​gluten​_free=7&nut_free=1&fish_free=23
 GET     /orders                     controllers.OrdersController.create(total: Int ?= 1, vegetarian: Int ?= 0, gluten_free: Int ?= 0, nut_free: Int ?= 0, fish_free: Int ?= 0)
 
 # Map static resources from the /public folder to the /assets URL path
