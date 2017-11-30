@@ -89,7 +89,7 @@ docker run -it -p 9000:9000 -v lib:/root/.ivy2/cache --name meal-order-generator
 ```bash
 http://localhost:9000/orders?total=50&vegetarian=5&gluten_free=7&nut_free=1&fish_free=23
 ```
-All the query parameters are optional. The default for 'total' is 1 and 0 for all the others.
+If it's a first time request, then it'll take serveral seconds to get a response (due to code compilation). Subsequent requests should receive fast responses. All the query parameters are optional. The default for 'total' is 1 and 0 for all the others.
 
 ## How to review the code
 This implementaion was built on the [Play Framework](https://www.playframework.com/) (Scala). The files of interest are the following (in the order for easy understanding of workflow): 
