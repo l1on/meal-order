@@ -75,7 +75,7 @@ unachievable goal.
 1. Make sure you have [Docker](https://www.docker.com/community-edition#/download) installed.
 2. Run this in your terminal:
 ```bash
-docker run -it -p 80:9000 -v lib:/root/.ivy2/cache --name meal-order-generator --rm iluvzhouying/meal-order-generator
+docker run -it -p 9000:9000 -v lib:/root/.ivy2/cache --name meal-order-generator --rm iluvzhouying/meal-order-generator
 ```
   then wait until you see the following in the terminal (it will take a while depending on your internet connection):
 ```
@@ -88,7 +88,7 @@ docker run -it -p 80:9000 -v lib:/root/.ivy2/cache --name meal-order-generator -
 ```
 3. Issue an HTTP GET request like this:
 ```bash
-http://localhost/orders?total=50&vegetarian=5&gluten_free=7&nut_free=1&fish_free=23
+http://localhost:9000/orders?total=50&vegetarian=5&gluten_free=7&nut_free=1&fish_free=23
 ```
 All the query parameters are optional. The default for 'total' is 1 and 0 for all the others.
 
