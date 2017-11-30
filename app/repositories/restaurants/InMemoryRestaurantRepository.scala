@@ -4,6 +4,9 @@ import models.Restaurant
 
 import javax.inject._
 
+/**
+  * An in-memory implementation for restaurant storage.
+  */
 @Singleton
 class InMemoryRestaurantRepository extends RestaurantRepository {
   override def readAll: List[Restaurant] = List(

@@ -20,7 +20,7 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
 
       val requirement = Requirement(others = 38, vegetarian = 5, glutenFree = 7, nutFree = 0, fishFree = 0)
 
-      val actualOrders = orderSvc.createOrders(requirement)
+      val actualOrders = orderSvc.buildOrders(requirement)
 
       actualOrders mustEqual List(Order("A", 36, 4, 0, 0, 0), Order("B", 2, 1, 7, 0, 0))
     }
@@ -36,7 +36,7 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
 
       val requirement = Requirement(others = 400, vegetarian = 100, glutenFree = 250, nutFree = 0, fishFree = 0)
 
-      val actualOrders = orderSvc.createOrders(requirement)
+      val actualOrders = orderSvc.buildOrders(requirement)
 
       actualOrders mustEqual List()
     }
@@ -46,7 +46,7 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
 
       val requirement = Requirement(others = 400, vegetarian = 100, glutenFree = 250, nutFree = 0, fishFree = 0)
 
-      val actualOrders = orderSvc.createOrders(requirement)
+      val actualOrders = orderSvc.buildOrders(requirement)
 
       actualOrders mustEqual List()
     }
@@ -59,7 +59,7 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
 
       val requirement = Requirement(others = 0, vegetarian = 0, glutenFree = 0, nutFree = 0, fishFree = 0)
 
-      val actualOrders = orderSvc.createOrders(requirement)
+      val actualOrders = orderSvc.buildOrders(requirement)
 
       actualOrders mustEqual List()
     }
@@ -72,7 +72,7 @@ class OrderServiceSpec extends PlaySpec with MockitoSugar {
 
       val requirement = Requirement(others = 2, vegetarian = 1, glutenFree = 0, nutFree = 0, fishFree = 0)
 
-      val actualOrders = orderSvc.createOrders(requirement)
+      val actualOrders = orderSvc.buildOrders(requirement)
 
       actualOrders.exists(o => o.restaurant == "A") mustBe false
     }
