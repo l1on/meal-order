@@ -107,7 +107,18 @@ app/repositories/restaurants/InMemoryRestaurantRepository.scala
 Even if you're not familiar with Scala, you will, due to a fair amount of comments in the code, find it easy to have a general understanding of what the code is doing, especially 
 if you're already fluent in Java.
 
-One thing you'll probably notice in the code is that all the variables are immutable and recursion takes the place of loops. 
+The test code resides in the following files:
+```bash
+test/models/RequirementSpec.scala
+test/models/RestaurantSpec.scala
+test/services/OrderServiceSpec.scala
+```
+If you want to run those tests, type the following in your terminal:
+```bash
+docker exec meal-order-generator sbt test
+```
+
+One thing you'll probably notice in the entire implementaion is that all the variables are immutable and recursions take the place of loops. 
 That's intentional because I want to see how far I can go with functional programming and the tangible benefits it has in
 non-trivial programs (it's been goood so far. The biggest benefits are clean code and easy-to-fix bugs).
 
