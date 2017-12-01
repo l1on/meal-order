@@ -35,14 +35,16 @@ class OrderService @Inject()(restaurantRepo: RestaurantRepository) {
       if (requirement.others + requirement.vegetarian + requirement.glutenFree + requirement.nutFree + requirement.fishFree > 0) {
         val newRequirement = head.fulfill(requirement)
 
-        val vegetarianFulfilled = requirement.vegetarian - newRequirement.vegetarian
-        val glutenFreeFulfilled = requirement.glutenFree - newRequirement.glutenFree
-        val nutFreeFulfilled = requirement.nutFree - newRequirement.nutFree
-        val fishFreeFulfilled = requirement.fishFree - newRequirement.fishFree
-        val othersFulfilled = requirement.others - newRequirement.others
-
         if (newRequirement == requirement) buildOrdersRecur(tail, newRequirement)
-        else Order(head.name, othersFulfilled, vegetarianFulfilled, glutenFreeFulfilled, nutFreeFulfilled, fishFreeFulfilled) :: buildOrdersRecur(tail, newRequirement)
+        else {
+          val vegetarianFulfilled = requirement.vegetarian - newRequirement.vegetarian
+          val glutenFreeFulfilled = requirement.glutenFree - newRequirement.glutenFree
+          val nutFreeFulfilled = requirement.nutFree - newRequirement.nutFree
+          val fishFreeFulfilled = requirement.fishFree - newRequirement.fishFree
+          val othersFulfilled = requirement.others - newRequirement.others
+
+          Order(head.name, othersFulfilled, vegetarianFulfilled, glutenFreeFulfilled, nutFreeFulfilled, fishFreeFulfilled) :: buildOrdersRecur(tail, newRequirement)
+        }
       } else List()
     }
   }

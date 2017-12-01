@@ -104,7 +104,7 @@ app/models/Restaurant.scala
 app/repositories/restaurants/RestaurantRepository.scala
 app/repositories/restaurants/InMemoryRestaurantRepository.scala
 ```
-Even if you're not familiar with Scala, you will, due to a fair amount of comments in the code, find it easy to have a general understanding of what the code is doing, especially 
+Even if you're not familiar with Scala, you will, due to a fair amount of comments in the code, find it easy to have a general understanding of what the code is doing, especially
 if you're already fluent in Java.
 
 The test code resides in the following files:
